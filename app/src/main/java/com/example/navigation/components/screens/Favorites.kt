@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.navigation.R
 
@@ -39,14 +40,41 @@ fun Favorites() {
                     modifier = Modifier
                         .align(Alignment.TopCenter)
                         .fillMaxWidth()
-                        .padding(20.dp)
                 )
-                Text(
-                    text = "No Favorites",
-                    fontSize = MaterialTheme.typography.h4.fontSize,
-                    fontWeight = FontWeight.Light,
-                    color = Color.Black
-                )
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .padding(top = 100.dp)
+
+                ) {
+                    Text(
+                        text = "No Favorites",
+                        fontSize = MaterialTheme.typography.h4.fontSize,
+                        fontWeight = FontWeight.Light,
+                        color = Color.Black
+                    )
+                    Text(
+                        text = "Add your favorite routines here for easy access.",
+                        fontSize = MaterialTheme.typography.h6.fontSize,
+                        fontWeight = FontWeight.Light,
+                        color = Color.Gray,
+                        modifier = Modifier
+                            .padding(horizontal =  20.dp),
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Tap the '+' button here to add your favorite routines",
+                        fontSize = MaterialTheme.typography.h6.fontSize,
+                        fontWeight = FontWeight.Light,
+                        modifier = Modifier
+                            .padding(horizontal =  20.dp),
+                        color = Color.Gray,
+                        textAlign = TextAlign.Center
+                    )
+                }
+
             }
         }
     )
