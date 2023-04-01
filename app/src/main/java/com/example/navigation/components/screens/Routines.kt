@@ -19,18 +19,19 @@ import com.example.navigation.R
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-fun Favorites() {
+fun Routines() {
     Scaffold(
         floatingActionButton = {
             FloatingActionButton(
                 backgroundColor = Color.Blue,
                 onClick = { /* ... */ },
-                modifier = Modifier.padding(vertical = 60.dp)
+                modifier = Modifier
+                    .padding(vertical = 60.dp)
             ) {
                 Icon(
-                    tint=Color.White,
                     imageVector = Icons.Default.Add,
-                    contentDescription = "Add"
+                    contentDescription = "Add",
+                    tint = Color.White
                 )
             }
         },
@@ -43,7 +44,7 @@ fun Favorites() {
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(id = R.drawable.star),
+                    painter = painterResource(id = R.drawable.routines),
                     contentDescription = "Favorites Icon",
                     modifier = Modifier
                         .align(Alignment.TopCenter)
@@ -57,23 +58,14 @@ fun Favorites() {
 
                 ) {
                     Text(
-                        text = "No Favorites",
+                        text = "No Routines!",
                         fontSize = MaterialTheme.typography.h4.fontSize,
                         fontWeight = FontWeight.Light,
                         color = Color.Black
                     )
-                    Text(
-                        text = "Add your favorite routines here for easy access.",
-                        fontSize = MaterialTheme.typography.h6.fontSize,
-                        fontWeight = FontWeight.Light,
-                        color = Color.Gray,
-                        modifier = Modifier
-                            .padding(horizontal =  20.dp),
-                        textAlign = TextAlign.Center
-                    )
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Tap the '+' button here to add your favorite routines",
+                        text = "Tap the '+' button below to get started.",
                         fontSize = MaterialTheme.typography.h6.fontSize,
                         fontWeight = FontWeight.Light,
                         modifier = Modifier

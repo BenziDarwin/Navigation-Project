@@ -83,9 +83,7 @@ BottomNavigationItem(
         it.route == screen.route
     } == true,
     onClick = {
-        if( screen.title == "Favorites" || screen.title == "Things") {
-            navController.navigate(screen.route)
-        }
+        navController.navigate(screen.route)
     }
 )
 }
