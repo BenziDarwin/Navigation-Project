@@ -25,22 +25,6 @@ import androidx.navigation.compose.rememberNavController
 fun NavigationScreen() {
     val navController = rememberNavController()
 Scaffold(
-    topBar = {
-        TopAppBar(backgroundColor = Color.Yellow) {
-            // this is row scope
-            // add your layout here
-            Row(
-                horizontalArrangement = Arrangement.Center,
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Text(
-                    text = "My Smart Home",
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 25.sp
-                )
-            }
-        }
-    },
     bottomBar = {BottomBar(navController = navController)}) {
     BottomNavGraph(navController = navController)
 
@@ -73,6 +57,8 @@ fun RowScope.AddItem(
     navController: NavHostController
 ) {
 BottomNavigationItem(
+    selectedContentColor = Color.White,
+    unselectedContentColor = Color.Black,
     label = {
         Text(text = screen.title)
             },

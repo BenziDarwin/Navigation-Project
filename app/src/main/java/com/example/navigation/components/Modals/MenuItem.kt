@@ -18,7 +18,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun MenuItem(icon: ImageVector, title: String, subtitle: String?, iconColor: Color?, iconBackground:Color?) {
+fun MenuItem(icon: ImageVector, title: String, subtitle: String? = null, iconColor: Color? = null, iconBackground:Color? = null) {
     Box(
         modifier = Modifier.background(Color.White)
         .fillMaxWidth().padding(10.dp)
