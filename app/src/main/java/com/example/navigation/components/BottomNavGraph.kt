@@ -5,10 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.navigation.components.screens.*
-import com.example.navigation.components.screens.Routines.CreateRoutine
-import com.example.navigation.components.screens.Routines.CreateThing
-import com.example.navigation.components.screens.Routines.SelectEvent
-import com.example.navigation.components.screens.Routines.SelectRoutine
+import com.example.navigation.components.screens.Routines.*
 
 @Composable
 fun BottomNavGraph(navController: NavHostController) {
@@ -45,6 +42,12 @@ NavHost(navController = navController,
     }
     composable(route = Screens.CreateThing.route) {
         CreateThing(navController)
+    }
+    composable(route = Screens.Thing.route) {
+        Thing(navController)
+    }
+    composable(route = Screens.ThingSelect.route) {
+        ThingSelect(navController)
     }
 }
 }

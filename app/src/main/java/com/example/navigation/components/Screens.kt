@@ -25,4 +25,12 @@ sealed class Screens(
         route = "creatething",
         title = "Create Thing"
     )
+    object Thing: Screens(
+        route = "thing",
+        title = "Thing"
+    )
+    object ThingSelect: Screens(
+        route = "thingselect",
+        title = "Thing Select"
+    )
 }
