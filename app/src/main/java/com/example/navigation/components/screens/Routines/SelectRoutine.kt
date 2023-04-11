@@ -46,7 +46,8 @@ fun SelectRoutine(
                         imageVector = Icons.Default.ArrowBack,
                         contentDescription = "Back",
                         tint = Color.Black,
-                        modifier = Modifier.align(Alignment.CenterStart)
+                        modifier = Modifier
+                            .align(Alignment.CenterStart).clickable { navController.popBackStack() }
                     )
                 }
             }
@@ -76,7 +77,9 @@ fun SelectRoutine(
                     Spacer(
                         modifier = Modifier.width(20.dp)
                     )
-                    Text(text = "Create a new Routine",
+                    Text(
+                        text = "Create a new Routine",
+                        color = Color.Black,
                     fontSize = 30.sp)
                 }
             }

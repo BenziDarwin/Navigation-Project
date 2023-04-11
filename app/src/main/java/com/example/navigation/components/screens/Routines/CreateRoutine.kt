@@ -49,7 +49,7 @@ fun CreateRoutine(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close",
                         tint = Color.Black,
-                        modifier = Modifier.align(Alignment.CenterStart)
+                        modifier = Modifier.align(Alignment.CenterStart).clickable { navController.navigate("selectroutine") }
                     )
 
                     Icon(
@@ -69,7 +69,7 @@ fun CreateRoutine(
                     .background(Color.LightGray)
                     .padding(top = 10.dp),
             ) {
-                Column( modifier = Modifier
+                Column(modifier = Modifier
                     .verticalScroll(rememberScrollState())
                 ) {
                     TextField(
@@ -84,7 +84,6 @@ fun CreateRoutine(
                     )
                     Text(
                         text = "When",
-                        fontWeight = FontWeight.SemiBold,
                         fontSize = 30.sp)
                     Text(
                         text = "Want this event to run automatically? Add an event below.",
@@ -97,19 +96,60 @@ fun CreateRoutine(
                             .padding(20.dp)
                     )
 
-                        Box(contentAlignment = Alignment.CenterStart) {
-                            Text(text = "Add Event",
-
+                        Box(
+                            contentAlignment = Alignment.CenterEnd,
+                            modifier = Modifier.fillMaxWidth().padding(top=10.dp, end=10.dp)
+                        ) {
+                            Row(){
+                                Text(text = "Add Event",
+                                    fontSize = 25.sp)
+                                Spacer(modifier = Modifier.width(10.dp))
+                                Box(
+                                    contentAlignment = Alignment.Center,
+                                    modifier = Modifier
+                                        .clip(CircleShape)
+                                        .size(40.dp)
+                                        .clickable {/*  */ }
+                                        .background(Color.Blue)
+                                ){
+                                    Icon(
+                                        imageVector = Icons.Default.Add,
+                                        contentDescription = "Add Routine",
+                                        tint = Color.White,
+                                        modifier = Modifier
+                                            .size(35.dp)
+                                    )
+                                }
+                            }
+                    }
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "Run These Actions",
+                        fontSize = 30.sp)
+                    Text(
+                        text = "No Actions. Tap Below to add one.",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.Gray)
+                            .padding(20.dp)
+                    )
+                    Box(
+                        contentAlignment = Alignment.CenterEnd,
+                        modifier = Modifier.fillMaxWidth().padding(top=10.dp, end=10.dp)
+                    ) {
+                        Row(){
+                            Text(text = "Add Action",
                                 fontSize = 25.sp)
-                            Spacer(
-                                modifier = Modifier.width(20.dp)
-                            )
+                            Spacer(modifier = Modifier.width(10.dp))
                             Box(
                                 contentAlignment = Alignment.Center,
                                 modifier = Modifier
                                     .clip(CircleShape)
                                     .size(40.dp)
-                                    .clickable { navController.navigate("createroutine") }
+                                    .clickable {/*  */ }
                                     .background(Color.Blue)
                             ){
                                 Icon(
@@ -118,11 +158,24 @@ fun CreateRoutine(
                                     tint = Color.White,
                                     modifier = Modifier
                                         .size(35.dp)
-                                        .align(Alignment.CenterEnd)
                                 )
                             }
+                        }
                     }
-
+                    Spacer(modifier = Modifier.height(10.dp))
+                    Text(
+                        text = "But Only if",
+                        fontSize = 30.sp)
+                    Text(
+                        text = "Add an event before adding conditions.",
+                        fontWeight = FontWeight.SemiBold,
+                        fontSize = 20.sp,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color.Gray)
+                            .padding(20.dp)
+                    )
                 }
             }
         }
