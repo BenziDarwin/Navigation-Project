@@ -6,6 +6,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.example.navigation.components.screens.*
 import com.example.navigation.components.screens.Routines.CreateRoutine
+import com.example.navigation.components.screens.Routines.CreateThing
+import com.example.navigation.components.screens.Routines.SelectEvent
 import com.example.navigation.components.screens.Routines.SelectRoutine
 
 @Composable
@@ -34,6 +36,15 @@ NavHost(navController = navController,
 
     composable(route = Screens.CreateRoutine.route) {
         CreateRoutine(navController)
+    }
+    composable(route = Screens.SelectEvent.route) {
+        SelectEvent(navController)
+    }
+    composable(route = Screens.CreateRoutineDatePick.route) {
+        CreateRoutine(navController = navController, pickDate = true)
+    }
+    composable(route = Screens.CreateThing.route) {
+        CreateThing(navController)
     }
 }
 }

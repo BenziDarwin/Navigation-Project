@@ -13,4 +13,16 @@ sealed class Screens(
         route = "createroutine",
         title = "Create Routine"
     )
+    object SelectEvent: Screens(
+        route = "selectevent",
+        title = "Select Event"
+    )
+    object CreateRoutineDatePick: Screens(
+        route = "createroutinedatepick",
+        title = "Create Routine"
+    )
+    object CreateThing: Screens(
+        route = "creatething",
+        title = "Create Thing"
+    )
 }

@@ -1,6 +1,8 @@
 package com.example.navigation.components.screens.Routines
 
 import android.annotation.SuppressLint
+import android.app.TimePickerDialog
+import android.widget.TimePicker
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
@@ -9,27 +11,40 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Add
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Check
-import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import java.util.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun CreateRoutine(
     navController: NavHostController,
+    pickDate:Boolean = false
 ) {
+    val mContext = LocalContext.current
+    val mCalendar = Calendar.getInstance()
+    val mHour = mCalendar[Calendar.HOUR]
+    val mMinute = mCalendar[Calendar.MINUTE]
+    val mTime = remember{ mutableStateOf("") }
+    val mTimePickerDialog = TimePickerDialog(
+        mContext,
+        {_, mHour:Int, mMinute: Int -> mTime.value = "$mHour : $mMinute"
+        }, mHour, mMinute, true
+    )
+    if (pickDate) {
+        mTimePickerDialog.show()
+    }
     Scaffold(
         topBar = {
             TopAppBar(
@@ -49,7 +64,9 @@ fun CreateRoutine(
                         imageVector = Icons.Default.Close,
                         contentDescription = "Close",
                         tint = Color.Black,
-                        modifier = Modifier.align(Alignment.CenterStart).clickable { navController.navigate("selectroutine") }
+                        modifier = Modifier
+                            .align(Alignment.CenterStart)
+                            .clickable { navController.navigate("favorites") }
                     )
 
                     Icon(
@@ -85,20 +102,58 @@ fun CreateRoutine(
                     Text(
                         text = "When",
                         fontSize = 30.sp)
-                    Text(
-                        text = "Want this event to run automatically? Add an event below.",
-                        fontWeight = FontWeight.SemiBold,
-                        fontSize = 20.sp,
-                        textAlign = TextAlign.Center,
-                        modifier = Modifier
+                    if(mTime.value == ""){
+                        Text(
+                            text = "Want this event to run automatically? Add an event below.",
+                            fontWeight = FontWeight.SemiBold,
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .background(Color.Gray)
+                                .padding(20.dp)
+                        )
+                    }else{
+                        Box(modifier = Modifier
                             .fillMaxWidth()
-                            .background(Color.Gray)
-                            .padding(20.dp)
-                    )
+                            .background(Color.White)) {
+                            Row(
+                                verticalAlignment = Alignment.CenterVertically
+                            ){
+                                Icon(
+                                    imageVector = Icons.Default.DateRange,
+                                    contentDescription = "Time",
+                                    modifier = Modifier
+                                        .size(60.dp).padding(end = 10.dp)
+                                )
+                                Column() {
+                                    Text(
+                                        text = "Date & Time",
+                                        fontSize = 25.sp,
+                                        modifier = Modifier
+                                            .padding(top = 20.dp))
+                                    Text(
+                                        text = "The time is ${mTime.value}",
+                                        fontSize = 25.sp,
+                                        modifier = Modifier
+                                            .padding(bottom = 20.dp))
+                                }
+                            }
+                            Icon(
+                                imageVector = Icons.Default.Settings,
+                                contentDescription = "Settings",
+                                modifier = Modifier
+                                    .align(Alignment.CenterEnd)
+                                    .size(60.dp)
+                            )
+                        }
+                    }
 
                         Box(
                             contentAlignment = Alignment.CenterEnd,
-                            modifier = Modifier.fillMaxWidth().padding(top=10.dp, end=10.dp)
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .padding(top = 10.dp, end = 10.dp)
                         ) {
                             Row(){
                                 Text(text = "Add Event",
@@ -109,7 +164,7 @@ fun CreateRoutine(
                                     modifier = Modifier
                                         .clip(CircleShape)
                                         .size(40.dp)
-                                        .clickable {/*  */ }
+                                        .clickable { navController.navigate("selectevent") }
                                         .background(Color.Blue)
                                 ){
                                     Icon(
@@ -138,7 +193,9 @@ fun CreateRoutine(
                     )
                     Box(
                         contentAlignment = Alignment.CenterEnd,
-                        modifier = Modifier.fillMaxWidth().padding(top=10.dp, end=10.dp)
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 10.dp, end = 10.dp)
                     ) {
                         Row(){
                             Text(text = "Add Action",
@@ -149,7 +206,7 @@ fun CreateRoutine(
                                 modifier = Modifier
                                     .clip(CircleShape)
                                     .size(40.dp)
-                                    .clickable {/*  */ }
+                                    .clickable {navController.navigate("creatething") }
                                     .background(Color.Blue)
                             ){
                                 Icon(
