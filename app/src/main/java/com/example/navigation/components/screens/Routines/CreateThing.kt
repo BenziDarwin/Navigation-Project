@@ -37,7 +37,7 @@ fun CreateThing(
     val tabRowItems = listOf(
         TabRowItem(
             title = "THINGS",
-            screen = { },
+            screen = { Thing(navController = navController)},
         ),
         TabRowItem(
             title = "SCENES",
