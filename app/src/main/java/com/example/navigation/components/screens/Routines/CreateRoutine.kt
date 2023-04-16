@@ -23,7 +23,12 @@ import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
+import com.example.navigation.components.RoutineViewModel
+import com.example.navigation.data.Graph
+import com.example.navigation.data.Routine
+import com.example.navigation.data.RoutineDataSource
 import java.util.*
 
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
@@ -36,10 +41,12 @@ fun CreateRoutine(
     val mCalendar = Calendar.getInstance()
     val mHour = mCalendar[Calendar.HOUR]
     val mMinute = mCalendar[Calendar.MINUTE]
-    val mTime = remember{ mutableStateOf("") }
+    val viewModel = viewModel(RoutineViewModel::class.java)
+    val state by viewModel.state.collectAsState()
+    var mTime by remember{ mutableStateOf(state.event) }
     val mTimePickerDialog = TimePickerDialog(
         mContext,
-        {_, mHour:Int, mMinute: Int -> mTime.value = "$mHour : $mMinute"
+        {_, mHour:Int, mMinute: Int -> mTime = "$mHour : $mMinute"
         }, mHour, mMinute, true
     )
     if (pickDate) {
@@ -96,13 +103,14 @@ fun CreateRoutine(
                         value = title,
                         onValueChange = {
                             title = it
+
                         },
                         placeholder = { Text(text = "Routine Name") },
                     )
                     Text(
                         text = "When",
                         fontSize = 30.sp)
-                    if(mTime.value == ""){
+                    if(mTime == ""){
                         Text(
                             text = "Want this event to run automatically? Add an event below.",
                             fontWeight = FontWeight.SemiBold,
@@ -124,7 +132,8 @@ fun CreateRoutine(
                                     imageVector = Icons.Default.DateRange,
                                     contentDescription = "Time",
                                     modifier = Modifier
-                                        .size(60.dp).padding(end = 10.dp)
+                                        .size(60.dp)
+                                        .padding(end = 10.dp)
                                 )
                                 Column() {
                                     Text(
@@ -133,7 +142,7 @@ fun CreateRoutine(
                                         modifier = Modifier
                                             .padding(top = 20.dp))
                                     Text(
-                                        text = "The time is ${mTime.value}",
+                                        text = "The time is ${mTime}",
                                         fontSize = 25.sp,
                                         modifier = Modifier
                                             .padding(bottom = 20.dp))
@@ -206,7 +215,7 @@ fun CreateRoutine(
                                 modifier = Modifier
                                     .clip(CircleShape)
                                     .size(40.dp)
-                                    .clickable {navController.navigate("creatething") }
+                                    .clickable { navController.navigate("creatething") }
                                     .background(Color.Blue)
                             ){
                                 Icon(
